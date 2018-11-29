@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-long long get_pisano_period(long long m) {
+long long gpp(long long m) {
     long long a = 0, b = 1, c = a + b;
     for (int i = 0; i < m * m; i++) {
         c = (a + b) % m;
@@ -11,24 +11,19 @@ long long get_pisano_period(long long m) {
 }
 int main()
 {
-   long long int n,b;
-   cin>>n>>b;
+   long long int n,m;
+   cin>>n>>m;
    long long int p,q,c;
-   c = get_pisano_period(b);
-   p = n%b;
-   cout<<c<<endl;
-   cout<<p<<endl;
-   int a[c+1];
-   a[0] = 0;
-   a[1] = 1;
-   for(int i=2;i<=c;i++)
-     a[i] = (a[i-1]+ a[i-2])%b;
-     for(int i=0;i<=c;i++)
-      {// cout<<a[i]<<" ";
-        if(a[i]==151)
-         cout<<"index is : "<<i<<endl;
-      }
-    cout<<a[p+2]<<endl;
+   p = n%gpp(m);
+    long long a= 0;
+    long long b= 1;
+    long long r= p;
+    for (int i = 1; i < p; i++) {
+        r = (a + b) % m;
+        a = b;
+        b= r;
+    }
+    cout<<r%m<<endl;
     
     
     return 0;
