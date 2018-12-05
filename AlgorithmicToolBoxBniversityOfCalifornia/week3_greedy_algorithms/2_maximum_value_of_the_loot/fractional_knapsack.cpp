@@ -1,42 +1,33 @@
-#include <iostream>
-#include <vector>
+#include<bits/stdc++.h>
+using namespace std;
 
-using std::vector;
-
-double get_optimal_value(int capacity, vector<double> weights, vector<double> values) {
-  double value = 0.0,smw = 0;
-  int n  = weights.size();
-  for(int i = 0;i< n;i++)
-    smw += weights[i];
-    
-  while(capacity>0 && smw > 0)
-  { 
-       double max = 0;
-       int id = -1;
-	  for(int i = 0;i<n;i++)
+int maxind( vector<int> weights, vector<int> values)
+{
+    int id = 0;
+    double max = 0;
+    int n = weights.size();
+    for (int i = 0; i < weights.size(); i++) {
+        if (weights[i] != 0 && (double) values[i] / weights[i] > max) {
+            max = (double) values[i] / weights[i];
+            id = i;
+        }
+    }
+return id;
+}
+double get_optimal_value(int capacity, vector<int> weights, vector<int> values) {
+  double value = 0.0;
+    int n = weights.size(); 
+	   for(int i = 0;i<n;i++)
 	   {
-		 if( values[i]/weights[i]>max)
-		 {
-			 max = values[i]/weights[i];
-		      id = i;
-		 } 
+	     if(capacity == 0)
+	       return  value ;
+	       int id = maxind(weights,values);
+	   int a = min(capacity,weights[id]);
+	   value += a*(double)values[id]/weights[id];
+	   weights[id] -= a;
+	   capacity -= a;
 	   }
-	   if(capacity >= weights[id])
-	   {
-		   capacity -= weights[id];
-		   smw -= weights[id];
-		   value += values[id];
-		   values[id] = 0;
-	   }
-      else if (capacity > 0){
-		  double m = 0.0;
-		  m =(values[id]/weights[id])*capacity;
-		  value +=m;
-		  capacity = 0;
-		  smw = 0;
-	  }
-  }
-  
+	   
 
   return value;
 }
@@ -45,8 +36,8 @@ int main() {
   int n;
   int capacity;
   std::cin >> n >> capacity;
-  vector<double> values(n);
-  vector<double> weights(n);
+  vector<int> values(n);
+  vector<int> weights(n);
   for (int i = 0; i < n; i++) {
     std::cin >> values[i] >> weights[i];
   }
