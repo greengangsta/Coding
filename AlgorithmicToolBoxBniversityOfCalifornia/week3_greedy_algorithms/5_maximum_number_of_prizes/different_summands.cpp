@@ -7,7 +7,7 @@ vector<int> optimal_summands(int n) {
   vector<int> summands;
   //write your code here
   int i = 1;
-while(n > i)
+while(n >= i)
 {
 	 n = n - i ;
 	 summands.push_back(i);
