@@ -7,15 +7,14 @@ vector<int> optimal_summands(int n) {
   vector<int> summands;
   //write your code here
   int i = 1;
-while(n >= i)
+while(n > i)
 {
-	summands.push_back(i);
 	 n = n - i ;
+	 summands.push_back(i);
 	 i++;
 }
 int j = summands.size();
-if(n!= 0)
-summands[j-1] = summands[j-1] + i-n;
+summands[j-1] = summands[j-1] + n;
 return summands;
  
 }
