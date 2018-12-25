@@ -8,15 +8,15 @@ int binary_search(const vector<int> &a, int x) {
   int left = 0, right = (int)a.size(); 
   //write your code here
   //int m = left + (right-left)/2;
-  while(left<=right)
+  while(left <= right)
   {
-	    int m = left + (right-left)/2;
+	 int m = left + (right-left)/2;
 	  if(a[m]==x)
 		  return m;
 	  else if( a[m]<x)
-		  left = m;
+		  left = m+1;
 	  else
-		  right = m;
+	  right = m-1;
 		  
   }
 	  return -1;
@@ -45,6 +45,6 @@ int main() {
   }
   for (int i = 0; i < m; ++i) {
     //replace with the call to binary_search when implemented
-    std::cout << linear_search(a, b[i]) << ' ';
+    std::cout << binary_search(a, b[i]) << ' ';
   }
 }
