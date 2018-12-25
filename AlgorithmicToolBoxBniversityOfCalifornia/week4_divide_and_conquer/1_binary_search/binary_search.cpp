@@ -7,6 +7,20 @@ using std::vector;
 int binary_search(const vector<int> &a, int x) {
   int left = 0, right = (int)a.size(); 
   //write your code here
+  //int m = left + (right-left)/2;
+  while(left<=right)
+  {
+	    int m = left + (right-left)/2;
+	  if(a[m]==x)
+		  return m;
+	  else if( a[m]<x)
+		  left = m;
+	  else
+		  right = m;
+		  
+  }
+	  return -1;
+  
 }
 
 int linear_search(const vector<int> &a, int x) {
