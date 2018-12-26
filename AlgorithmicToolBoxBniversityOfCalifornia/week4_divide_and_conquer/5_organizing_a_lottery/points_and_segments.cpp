@@ -3,51 +3,52 @@ using namespace std;
 
 using std::vector;
 
-int bin_src_count(vector <int> a,int p)
+bool cmp(const pair<int,char> &a,const pair<int,char> &b)
 {
-	int n=a.size();
-	int l=0,r=n-1;
-	int m;
-	while(l<=r){
-	int m = l + (r-l)/2;
-	if(a[m]<=p)
-		l=m+1;
-	else
-		r= m-1;
-	}
-	
-	return l;
-}
-int bin_src_count1(vector <int> a,int p)
-{
-	int n=a.size();
-	int l=0,r=n-1;
-	int m;
-	while(l<=r){
-	int m = l + (r-l)/2;
-	if(a[m]<=p)
-		l=m+1;
-	else
-		r= m-1;
-	}
-	
-	return n-l;
+    if(a.first == b.first)
+      return (a.second < b.second);
+    else
+     return (a.first < b.first); 
 }
 
 vector<int> fast_count_segments(vector<int> starts, vector<int> ends, vector<int> points) {
   vector<int> cnt(points.size());
   //write your code here
-  int n=starts.size();
-  sort(starts.begin(),starts.end());
-  sort(ends.begin(),ends.end());
+  unordered_map<int,int > mp;
   for(int i=0;i<points.size();i++)
-   {
-	   int s,e;
-	  s = bin_src_count(starts,points[i]);
-	  e = bin_src_count1(ends,points[i]);
-	//  cout<<s<<" s and e "<<e<<endl;
-	  cnt[i]= s+e-n;
-   }
+    mp.insert(make_pair(points[i],0));
+  int p,s,j=0;
+  p = points.size();
+  s = starts.size();
+   vector <pair <int ,char> > pr;
+   for(int i=0;i<p;i++)
+     pr.push_back(make_pair(points[i],'p'));
+   for(int i=0;i<s;i++)
+     pr.push_back(make_pair(starts[i],'l'));
+   for(int i=0;i<s;i++)
+     pr.push_back(make_pair(ends[i],'r')); 
+   sort(pr.begin(),pr.end(),cmp); 
+ // for(auto it = pr.begin();it!=pr.end();it++)
+  //   cout<<it->first<<" "<<it->second<<"  ";
+  //   cout<<endl;
+    int ls=0,le=0;
+   for(auto it=pr.begin();it!=pr.end();it++)
+    {
+        if(it->second=='l')
+         ls++;
+        else if(it->second=='r')
+         le++;
+        else if(it->second=='p')
+        {
+         auto x = mp.find(it->first);
+          x->second = ls-le;
+        }
+    }
+    for(int i=0;i<points.size();i++)
+      {
+          auto it = mp.find(points[i]);
+          cnt[i] = it->second;
+      }
   return cnt;
 }
 
@@ -77,5 +78,4 @@ int main() {
   for (size_t i = 0; i < cnt.size(); i++) {
     std::cout << cnt[i] << ' ';
   }
-
 }
