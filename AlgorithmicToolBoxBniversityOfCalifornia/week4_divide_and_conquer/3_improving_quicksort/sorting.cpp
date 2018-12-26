@@ -1,6 +1,5 @@
-#include <iostream>
-#include <vector>
-#include <cstdlib>
+#include<bits/stdc++.h>
+using namespace std;
 
 using std::vector;
 using std::swap;
@@ -9,7 +8,19 @@ int partition2(vector<int> &a, int l, int r) {
   int x = a[l];
   int j = l;
   for (int i = l + 1; i <= r; i++) {
-    if (a[i] <= x) {
+    if (a[i] < x) {
+      j++;
+      swap(a[i], a[j]);
+    }
+  }
+  swap(a[l], a[j]);
+  return j;
+}
+int partition3(vector<int> &a, int l, int r) {
+  int x = a[l];
+  int j = l;
+  for (int i = l + 1; i <= r; i++) {
+    if (a[i] == x) {
       j++;
       swap(a[i], a[j]);
     }
@@ -23,12 +34,14 @@ void randomized_quick_sort(vector<int> &a, int l, int r) {
     return;
   }
 
-  int k = l + rand() % (r - l + 1);
+ int k = l + rand() % (r - l + 1);
+// cout<<k<<endl;
   swap(a[l], a[k]);
   int m = partition2(a, l, r);
-
+  int n = partition3(a,m,r);
+ // cout<<m<<" "<<n<<endl;
   randomized_quick_sort(a, l, m - 1);
-  randomized_quick_sort(a, m + 1, r);
+  randomized_quick_sort(a, n+1 , r);
 }
 
 int main() {
