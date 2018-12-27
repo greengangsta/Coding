@@ -3,11 +3,11 @@ using namespace std;
 
 bool cmp1(const pair<int,int> &a,const pair<int,int > &b)
 {
-    return a.first <= b.first;
+    return a.first < b.first;
 }
 bool cmp2(const pair<int,int> &a,const pair <int,int> &b)
 {
-	return a.second <= b.second;
+	return a.second < b.second;
 }
 double min(double x,double y)
 {
@@ -24,7 +24,7 @@ double dist(const pair<int,int> &a,const pair <int,int> &b)
 double brut_frc(vector <pair<int,int> >ps)
 {
     cout<<"check brut_frc"<<endl;
-	double min = 100000.000000;
+	double min = dist(ps[0],ps[1]);
 	for(int i=0;i<ps.size();i++)
 		for(int j=i+1;j<ps.size();j++)
 			 if(dist(ps[i],ps[j])<min)
@@ -38,7 +38,7 @@ double stripclosest(vector <pair <int,int> > strip,int j,int d)
     cout<<"check stripclosest"<<endl;
 	double min = d;
 	for(int i=0;i<j;++i)
-	  for(int k=i+1;k<j && (strip[k].second -strip[i].second)<min;++k)
+	  for(int k=i+1;k<j && (strip[k].second-strip[i].second)<min;++k)
 		  if(dist(strip[i],strip[k])<min)
 			  min=dist(strip[i],strip[k]);
 			  cout<<"min from strip closest is : "<<min<<endl;
@@ -54,10 +54,10 @@ double minimal_distance(vector<pair<int,int>> px, vector <pair<int ,int>> py) {
 		 return brut_frc(px);
 	   int m = n/2;
 	  cout<<"mid point of partition is : "<<m<<endl;
-	  pair<int,int> midpoint = px[m];
+	  pair<int,int> midpoint = px[m-1];
 	  cout<<"mid point co-ordinates are : "<<midpoint.first<<" "<<midpoint.second<<endl;
-	  vector <pair<int,int>> qx(m+1),qy(m+1);
-	  vector <pair<int,int>> rx(n-m-1),ry(n-m-1);
+	  vector <pair<int,int>> qx(m),qy(m);
+	  vector <pair<int,int>> rx(n-m),ry(n-m);
 	  int j=0,k=0;
 	    for(int i=0;i<py.size();i++)
 	      {
@@ -67,9 +67,9 @@ double minimal_distance(vector<pair<int,int>> px, vector <pair<int ,int>> py) {
 	             ry[k++]=py[i];
 	      }
 	      j=0;
-	    for(int i=0;i<=m;i++)
+	    for(int i=0;i<m;i++)
 	         qx[i] = px[i];
-	    for(int i=m+1;i<n;i++)
+	    for(int i=m;i<n;i++)
 	         rx[j++] =px[i];
 	  double dl = minimal_distance(qx,qy);
 	  double dr = minimal_distance(rx,ry);
@@ -88,7 +88,7 @@ double minimal_distance(vector<pair<int,int>> px, vector <pair<int ,int>> py) {
 			  cout<<"strip recently added is : "<<py[i].first<<" "<<py[i].second<<endl;
 		  }
 	   
-  return min (d,stripclosest(strip,j,d));
+  return min(d,stripclosest(strip,j,d));
 }
 
 int main() {
@@ -105,7 +105,8 @@ int main() {
   std::cout << std::fixed;
   	  sort(px.begin(),px.end(),cmp1);
   	  sort(py.begin(),py.end(),cmp2);
-  	      for(int i=0;i<n;i++)
-    cout<<py[i].first<<" "<<py[i].second<<endl;
+  	       for(int i=0;i<n;i++)
+    cout<<px[i].first<<" "<<px[i].second<<"    "<<py[i].first<<" "<<py[i].second<<endl;
+  	
   std::cout << std::setprecision(9) << minimal_distance(px,py) << "\n";
 }
