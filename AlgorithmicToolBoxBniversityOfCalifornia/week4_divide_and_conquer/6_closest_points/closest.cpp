@@ -9,13 +9,13 @@ bool cmp2(const pair<int,int> &a,const pair <int,int> &b)
 {
 	return a.second < b.second;
 }
-double min(double x,double y)
+double minm(double x,double y)
 {
     return (x<y)?x:y;
 }
 double dist(const pair<int,int> &a,const pair <int,int> &b)
 {
-    cout<<"check dist"<<endl;
+   // cout<<"check dist"<<endl;
 	return sqrt(
 	             (a.first -b.first)*(a.first -b.first) +
      	         (a.second -b.second)*(a.second -b.second)
@@ -23,42 +23,50 @@ double dist(const pair<int,int> &a,const pair <int,int> &b)
 }
 double brut_frc(vector <pair<int,int> >ps)
 {
-    cout<<"check brut_frc"<<endl;
+  //  cout<<"check brut_frc"<<endl;
 	double min = dist(ps[0],ps[1]);
 	for(int i=0;i<ps.size();i++)
 		for(int j=i+1;j<ps.size();j++)
 			 if(dist(ps[i],ps[j])<min)
 				 min = dist(ps[i],ps[j]);
-   cout<<"min ="<<min<<endl;
+  //cout<<"min brut frc is  ="<<min<<endl;
 	return min;
 }
 
-double stripclosest(vector <pair <int,int> > strip,int j,int d)
+double stripclosest(vector <pair <int,int> > strip,int j,double d)
 {
-    cout<<"check stripclosest"<<endl;
+   // cout<<"check stripclosest1"<<endl;;
+   //  cout<<"check stripclosest2"<<endl;
 	double min = d;
 	for(int i=0;i<j;++i)
 	  for(int k=i+1;k<j && (strip[k].second-strip[i].second)<min;++k)
 		  if(dist(strip[i],strip[k])<min)
 			  min=dist(strip[i],strip[k]);
-			  cout<<"min from strip closest is : "<<min<<endl;
+		//	  cout<<"min from strip closest is : "<<min<<endl;
    return min;
 }
 
 
 double minimal_distance(vector<pair<int,int>> px, vector <pair<int ,int>> py) {
+   //  for(int i=0;i<px.size();i++)
+   // cout<<px[i].first<<" "<<px[i].second<<"    "<<py[i].first<<" "<<py[i].second<<endl;
   //write your code here
-  cout<<"check minimal_distance"<<endl;
+ // cout<<"check minimal_distance"<<endl;
   int  n = px.size();
 	  if(n<=3)
 		 return brut_frc(px);
 	   int m = n/2;
-	  cout<<"mid point of partition is : "<<m<<endl;
+	//  cout<<"mid point of partition is : "<<m<<endl;
 	  pair<int,int> midpoint = px[m-1];
-	  cout<<"mid point co-ordinates are : "<<midpoint.first<<" "<<midpoint.second<<endl;
+	//  cout<<"mid point co-ordinates are : "<<midpoint.first<<" "<<midpoint.second<<endl;
 	  vector <pair<int,int>> qx(m),qy(m);
 	  vector <pair<int,int>> rx(n-m),ry(n-m);
 	  int j=0,k=0;
+	     for(int i=0;i<m;i++)
+	         qx[i] = px[i];
+	    for(int i=m;i<n;i++)
+	         rx[j++] =px[i];
+	         j=0,k=0;
 	    for(int i=0;i<py.size();i++)
 	      {
 	          if(py[i].first<=midpoint.first)
@@ -66,29 +74,26 @@ double minimal_distance(vector<pair<int,int>> px, vector <pair<int ,int>> py) {
 	          else
 	             ry[k++]=py[i];
 	      }
+//	      cout<<"sizes are "<<qx.size()<<" "<<qy.size()<<" "<<rx.size()<<" "<<ry.size()<<endl;
 	      j=0;
-	    for(int i=0;i<m;i++)
-	         qx[i] = px[i];
-	    for(int i=m;i<n;i++)
-	         rx[j++] =px[i];
 	  double dl = minimal_distance(qx,qy);
 	  double dr = minimal_distance(rx,ry);
-	   cout<<"left min is = "<<dl<<endl;
-	   cout<<"right min is = "<<dr<<endl;
-	   double d = min(dl,dr);
-	   cout<<"d : "<<d<<endl;
+//	  cout<<"left min is = "<<dl<<endl;
+//	  cout<<"right min is = "<<dr<<endl;
+	   double d = minm(dl,dr);
+//	   cout<<"d : "<<d<<endl;
 	  vector <pair <int,int > > strip(n);
 	   j=0; 
-	  for(int i=0;i<n;i++)
-		  if(abs(py[i].first-midpoint.first) <= d)
+	  for(int i=0;i<py.size();i++)
+		  if(abs(py[i].first-midpoint.first) < d)
 		  {
 			  strip[j].first = py[i].first;
 			  strip[j].second = py[i].second;
 			  j++;
-			  cout<<"strip recently added is : "<<py[i].first<<" "<<py[i].second<<endl;
+//			  cout<<"strip recently added is : "<<py[i].first<<" "<<py[i].second<<endl;
 		  }
-	   
-  return min(d,stripclosest(strip,j,d));
+//	   cout<<"value of final j is : "<<j<<endl;
+  return minm(d,stripclosest(strip,j,d));
 }
 
 int main() {
@@ -105,8 +110,7 @@ int main() {
   std::cout << std::fixed;
   	  sort(px.begin(),px.end(),cmp1);
   	  sort(py.begin(),py.end(),cmp2);
-  	       for(int i=0;i<n;i++)
-    cout<<px[i].first<<" "<<px[i].second<<"    "<<py[i].first<<" "<<py[i].second<<endl;
+  	      
   	
   std::cout << std::setprecision(9) << minimal_distance(px,py) << "\n";
 }
