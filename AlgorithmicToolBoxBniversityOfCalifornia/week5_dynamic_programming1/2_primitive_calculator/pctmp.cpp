@@ -4,6 +4,7 @@ using namespace std;
 
 int get_change(int m,int x[]) {
  vector <int> sequence;
+ sequence.push_back(m);
  int dp[m+1];
  memset(dp,100001,sizeof(dp));
   dp[0]=0;
@@ -13,18 +14,34 @@ int get_change(int m,int x[]) {
        int y=100001;
        for(int j=0;j<2;j++)
        {
+            y = min(y,dp[i-1]);
            if(i%x[j]==0)
            {
              y = min(y,dp[i/x[j]]);
-             if(y==dp[i/x[j]]);
-              {
-                  sequence.push_back(dp[i]*x[j]);
-              }
            }
        }
-        y = min(y,dp[i-1]);
     dp[i] = 1+y; 
    }
+   for(int i=m;i>2;i--)
+     {
+         if(dp[i]==dp[i-1]+1)
+          {
+              sequence.push_back(i-1);
+               i--;
+          }
+          else if(dp[i]==dp[i/x[0]]+1)
+          {
+              sequence.push_back(i/x[0]);
+               i/=x[0];
+          }
+          else if(dp[i]==dp[i/x[1]]+1)
+          {
+              sequence.push_back(i/x[1]);
+               i/=x[1];
+          }
+          
+     }
+    reverse(sequence.begin(), sequence.end());
   for(int i=0;i<sequence.size();i++)
     cout<<sequence[i]<<" ";
     cout<<endl;
@@ -32,8 +49,13 @@ int get_change(int m,int x[]) {
 }
 
 int main() {
-  int m;
-  int x[]={2,3};
-  std::cin >> m;
-  std::cout << get_change(m,x) << '\n';
+    int t;
+    cin>>t;
+    while(t--)
+    {
+      int m;
+      int x[]={2,3};
+      std::cin >> m;
+      std::cout << get_change(m,x) << '\n';
+    }
 }
