@@ -2,7 +2,7 @@
 using namespace std;
 
 
-int get_change(int m,int x[]) {
+void get_change(int m,int x[]) {
  vector <int> sequence;
  sequence.push_back(m);
  int dp[m+1];
@@ -22,30 +22,31 @@ int get_change(int m,int x[]) {
        }
     dp[i] = 1+y; 
    }
-   for(int i=m;i>2;i--)
+   for(int i=m;i>2;)
      {
          if(dp[i]==dp[i-1]+1)
           {
               sequence.push_back(i-1);
                i--;
           }
-          else if(dp[i]==dp[i/x[0]]+1)
+          else if(dp[i]==dp[i/x[0]]+1&&i%x[0]==0)
           {
               sequence.push_back(i/x[0]);
                i/=x[0];
           }
-          else if(dp[i]==dp[i/x[1]]+1)
+          else if(dp[i]==dp[i/x[1]]+1&&i%x[1]==0)
           {
               sequence.push_back(i/x[1]);
                i/=x[1];
           }
           
      }
+     cout<<dp[m]<<endl;
     reverse(sequence.begin(), sequence.end());
   for(int i=0;i<sequence.size();i++)
     cout<<sequence[i]<<" ";
     cout<<endl;
- return dp[m];    
+// return dp[m];    
 }
 
 int main() {
@@ -56,6 +57,7 @@ int main() {
       int m;
       int x[]={2,3};
       std::cin >> m;
-      std::cout << get_change(m,x) << '\n';
+      get_change(m,x);
+     // std::cout << get_change(m,x) << '\n';
     }
 }
