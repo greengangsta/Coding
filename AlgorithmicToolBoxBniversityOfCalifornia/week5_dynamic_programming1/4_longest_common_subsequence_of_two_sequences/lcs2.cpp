@@ -10,20 +10,29 @@ int lcs2(vector<int> &a, vector<int> &b) {
   for(int i=0;i<=m;i++)
     dp[i][0]=0;
   for(int j=0;j<=n;j++)
-    dp[j][0]0;
+    dp[0][j]=0;
+ // for(int i=0;i<n;i++)
+ //  cout<<dp[0][i]<<" ";
+ //  cout<<endl;
   for(int i=1;i<=m;i++)
+   {
     for(int j=1;j<=n;j++)
-       {
-           if(a[i]==b[j])
+       { 
+           if(a[i-1]==b[j-1])
             dp[i][j] = dp[i-1][j-1]+1;
            else
-            dp[i][j] = min(dp[i-1][j],dp[i][j-1])
+            dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+            
+       //     cout<<dp[i][j]<<" ";
        }
+   //    cout<<endl;
+   }
   
   return  dp[m][n];//std::min(std::min(a.size(), b.size()), c.size());
 }
 
 int main() {
+ 
   size_t n;
   std::cin >> n;
   vector<int> a(n);
@@ -39,4 +48,6 @@ int main() {
   }
 
   std::cout << lcs2(a, b) << std::endl;
+    
+    return 0;
 }
