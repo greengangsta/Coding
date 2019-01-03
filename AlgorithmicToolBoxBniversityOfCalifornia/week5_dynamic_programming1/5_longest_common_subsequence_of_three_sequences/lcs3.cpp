@@ -30,10 +30,7 @@ int lcs3(vector<int> &a, vector<int> &b, vector<int> &c) {
 }
 
 int main() {
-    int t;
-    cin>>t;
-    while(t--)
-    {
+    
   size_t an;
   std::cin >> an;
   vector<int> a(an);
@@ -53,6 +50,6 @@ int main() {
     std::cin >> c[i];
   }
   std::cout << lcs3(a, b, c) << std::endl;
-    }
+
     return 0;
 }
