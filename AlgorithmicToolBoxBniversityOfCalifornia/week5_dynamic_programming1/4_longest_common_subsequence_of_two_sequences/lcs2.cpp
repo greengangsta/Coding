@@ -3,10 +3,11 @@ using namespace std;
 
 int lcs2(vector<int> &a, vector<int> &b) {
   //write your code here
-  int m,n;
+  int m,n,o;
   m = a.size();
   n = b.size();
-  int dp[m+1][n+1];
+  o = c.size();
+  int dp[m+1][n+1][0+1];
   for(int i=0;i<=m;i++)
     dp[i][0]=0;
   for(int j=0;j<=n;j++)

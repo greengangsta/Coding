@@ -1,14 +1,39 @@
-#include <iostream>
-#include <vector>
-
-using std::vector;
+#include <bits/stdc++.h>
+using namespace std;
 
 int lcs3(vector<int> &a, vector<int> &b, vector<int> &c) {
   //write your code here
-  return std::min(std::min(a.size(), b.size()), c.size());
+ int m,n,o;
+  m = a.size();
+  n = b.size();
+  o = c.size();
+  int dp[m+1][n+1][o+1];
+
+  for(int i=0;i<=m;i++)
+   {
+    for(int j=0;j<=n;j++)
+       { 
+           for(int k=0;k<=o;k++)
+		   {
+		       if(i==0||j==0||k==0)
+		       dp[i][j][k]=0;
+		    else if(a[i-1]==b[j-1]&&a[i-1]==c[k-1])
+             dp[i][j][k] = dp[i-1][j-1][k-1]+1;
+           else
+            dp[i][j][k] = max(dp[i-1][j][k],max(dp[i][j-1][k],dp[i][j][k-1]));
+            
+		   }
+       }
+   }
+  
+  return  dp[m][n][o];
 }
 
 int main() {
+    int t;
+    cin>>t;
+    while(t--)
+    {
   size_t an;
   std::cin >> an;
   vector<int> a(an);
@@ -28,4 +53,6 @@ int main() {
     std::cin >> c[i];
   }
   std::cout << lcs3(a, b, c) << std::endl;
+    }
+    return 0;
 }
