@@ -18,9 +18,9 @@ int optimal_weight(int W, const vector<int> &w) {
         {
             int v;
             dp[i][j] = dp[i-1][j];
-            if(w[i]<=j)
+            if(w[i-1]<=j)
               { 
-                v = dp[i-1][j-w[i]] + w[i];
+                v = dp[i-1][j-w[i-1]] + w[i-1];
                  if(dp[i][j]<v)
                    dp[i][j]=v;
                }
