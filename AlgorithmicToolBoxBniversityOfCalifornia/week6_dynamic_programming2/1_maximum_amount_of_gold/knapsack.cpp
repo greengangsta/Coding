@@ -5,13 +5,28 @@ using std::vector;
 
 int optimal_weight(int W, const vector<int> &w) {
   //write your code here
-  int current_weight = 0;
-  for (size_t i = 0; i < w.size(); ++i) {
-    if (current_weight + w[i] <= W) {
-      current_weight += w[i];
+  int n=w.size();
+  int dp[n+1][W+1];
+  for(int i=0;i<=W;i++)
+     dp[0][i]=0; 
+  for(int i=0;i<=n;i++)
+     dp[i][0]=0;   
+     
+  for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=W;j++)
+        {
+            int v;
+            dp[i][j] = dp[i-1][j];
+            if(w[i]<=j)
+              { 
+                v = dp[i-1][j-w[i]] + w[i];
+                 if(dp[i][j]<v)
+                   dp[i][j]=v;
+               }
+        }
     }
-  }
-  return current_weight;
+  return dp[n][W];
 }
 
 int main() {

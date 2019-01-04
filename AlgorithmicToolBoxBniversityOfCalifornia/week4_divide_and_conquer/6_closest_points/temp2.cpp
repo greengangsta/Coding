@@ -9,11 +9,11 @@ bool cmp2(const pair<int,int> &a,const pair <int,int> &b) //to sort according to
 {
 	return a.second < b.second;
 }
-double minm(double x,double y)  //minimum of two double values
+float minm(float x,float y)  //minimum of two float values
 {
     return (x<y)?x:y;
 }
-double dist(const pair<int,int> &a,const pair <int,int> &b) // to calculate distance
+float dist(const pair<int,int> &a,const pair <int,int> &b) // to calculate distance
 {
    // cout<<"check dist"<<endl;
 	return sqrt(
@@ -21,10 +21,10 @@ double dist(const pair<int,int> &a,const pair <int,int> &b) // to calculate dist
      	         (a.second -b.second)*(a.second -b.second)
             	);
 }
-double brut_frc(vector <pair<int,int> >ps)   // to find the distance with bruteforce for less than 4 points.
+float brut_frc(vector <pair<int,int> >ps)   // to find the distance with bruteforce for less than 4 points.
 {
   //  cout<<"check brut_frc"<<endl;
-	double min = dist(ps[0],ps[1]);
+	float min = dist(ps[0],ps[1]);
 	for(int i=0;i<ps.size();i++)
 		for(int j=i+1;j<ps.size();j++)
 			 if(dist(ps[i],ps[j])<min)
@@ -33,11 +33,11 @@ double brut_frc(vector <pair<int,int> >ps)   // to find the distance with brutef
 	return min;
 }
 
-double stripclosest(vector <pair <int,int> > strip,int j,double d) // to calculate if there is a pair with minmum distance within the strip
+float stripclosest(vector <pair <int,int> > strip,int j,float d) // to calculate if there is a pair with minmum distance within the strip
 {
    // cout<<"check stripclosest1"<<endl;;
    //  cout<<"check stripclosest2"<<endl;
-	double min = d;
+	float min = d;
 	for(int i=0;i<j;++i)
 	  for(int k=i+1;k<j && (strip[k].second-strip[i].second)<min;++k)
 		  if(dist(strip[i],strip[k])<min)
@@ -47,7 +47,7 @@ double stripclosest(vector <pair <int,int> > strip,int j,double d) // to calcula
 }
 
 
-double minimal_distance(vector<pair<int,int>> px, vector <pair<int ,int>> py)  // to find the pair of points with minimum distance.
+float minimal_distance(vector<pair<int,int>> px, vector <pair<int ,int>> py)  // to find the pair of points with minimum distance.
  {
    //  for(int i=0;i<px.size();i++)
    // cout<<px[i].first<<" "<<px[i].second<<"    "<<py[i].first<<" "<<py[i].second<<endl;
@@ -77,11 +77,11 @@ double minimal_distance(vector<pair<int,int>> px, vector <pair<int ,int>> py)  /
 	      }
 //	      cout<<"sizes are "<<qx.size()<<" "<<qy.size()<<" "<<rx.size()<<" "<<ry.size()<<endl;
 	      j=0;
-	  double dl = minimal_distance(qx,qy);
-	  double dr = minimal_distance(rx,ry);
+	  float dl = minimal_distance(qx,qy);
+	  float dr = minimal_distance(rx,ry);
 //	  cout<<"left min is = "<<dl<<endl;
 //	  cout<<"right min is = "<<dr<<endl;
-	   double d = minm(dl,dr);
+	   float d = minm(dl,dr);
 //	   cout<<"d : "<<d<<endl;
 	  vector <pair <int,int > > strip(n);
 	   j=0; 
