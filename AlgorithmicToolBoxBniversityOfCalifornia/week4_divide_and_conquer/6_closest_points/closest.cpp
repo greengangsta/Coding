@@ -61,7 +61,7 @@ double minimal_distance(vector<pair<int,int>> px, vector <pair<int ,int>> py)  /
 	  pair<int,int> midpoint = px[m-1];
 	//  cout<<"mid point co-ordinates are : "<<midpoint.first<<" "<<midpoint.second<<endl;
 	  vector <pair<int,int>> qx(m),qy(m);
-	  vector <pair<int,int>> rx(n-m),ry(n-m);
+	  vector <pair<int,int>> rx(abs(n-m)),ry(abs(n-m));
 	  int j=0,k=0;
 	     for(int i=0;i<m;i++)
 	         qx[i] = px[i];
