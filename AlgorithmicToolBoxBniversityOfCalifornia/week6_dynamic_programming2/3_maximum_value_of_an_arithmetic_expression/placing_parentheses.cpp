@@ -1,12 +1,21 @@
-#include <iostream>
-#include <cassert>
-#include <string>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
-using std::vector;
-using std::string;
-using std::max;
-using std::min;
+long long int dp1[15][15],dp2[15][15];
+long long int minl(long long int a,long long int b)
+{
+    if(a>b)
+    return b;
+    else
+    return a;
+}
+long long int maxl(long long int a,long long int b)
+{
+    if(a<b)
+    return b;
+    else
+    return a;
+}
 
 long long eval(long long a, long long b, char op) {
   if (op == '*') {
@@ -19,14 +28,78 @@ long long eval(long long a, long long b, char op) {
     assert(0);
   }
 }
+vector <long long int> minandmax(int i,int j,string exp)
+{
+	vector <long long int> res(2);
+    long long int min1 = 999999999999999;
+   long long int max1 = -999999999999999;
+   for(int k=i;k<=j-1;k++)
+   {
+      //  cout<<"check3"<<endl;
+       long long int a,b,c,d;
+       a = eval(dp2[i][k],dp2[k+1][j],exp[k*2 +1]);
+       b = eval(dp2[i][k],dp1[k+1][j],exp[k*2 +1]);
+       c = eval(dp1[i][k],dp2[k+1][j],exp[k*2 +1]);
+       d = eval(dp1[i][k],dp1[k+1][j],exp[k*2 +1]);
+	   min1 = minl(min1,minl(a,minl(b,minl(c,d))));
+	   max1 = maxl(max1,maxl(a,maxl(b,maxl(c,d))));
+   }
+   res[0]=min1;
+   res[1]=max1;
+return res;   
+}
 
-long long get_maximum_value(const string &exp) {
+long long get_maximum_value(const string exp) {
   //write your code here
-  return 0;
+  int n=exp.length();
+//  int dp1[n][n],dp2[n][n];
+  for(int i=0;i<=n/2;i++)
+    {
+      //  cout<<"check1"<<endl;
+        dp1[i][i]=exp[i*2]-'0';
+        dp2[i][i]=exp[i*2]-'0';
+    }
+  for(int s=1;s<=n/2;s++)
+   {
+       for(int i=0;i<=n/2-s;i++)
+      {
+        //   cout<<"check2"<<endl;
+          int j=i+s;
+          vector<long long int> res(2);
+          res = minandmax(i,j,exp);
+          dp1[i][j]=res[0];
+          dp2[i][j]=res[1];
+      }
+   }
+ /*  
+  for(int i=0;i<=n/2;i++)
+  {
+      for(int j=0;j<=n/2;j++)
+      {
+          cout<<dp1[i][j]<<" ";
+      }
+      cout<<endl;
+  }
+  cout<<endl<<endl;
+  for(int i=0;i<=n/2;i++)
+  {
+      for(int j=0;j<=n/2;j++)
+      {
+          cout<<dp2[i][j]<<" ";
+      }
+      cout<<endl;
+  }
+   */
+  return dp2[0][n/2];
 }
 
 int main() {
+   
+        // cout<<"case : "<<t<<endl;
   string s;
   std::cin >> s;
   std::cout << get_maximum_value(s) << '\n';
+ // long long  p=205891132094649;
+ // cout<<"value of p is : "<<p<<endl;
+    
 }

@@ -2,6 +2,20 @@
 using namespace std;
 
 long long int dp1[14][14],dp2[14][14];
+long long int minl(long long int a,long long int b)
+{
+    if(a>b)
+    return b;
+    else
+    return a;
+}
+long long int maxl(long long int a,long long int b)
+{
+    if(a<b)
+    return b;
+    else
+    return a;
+}
 
 long long eval(long long a, long long b, char op) {
   if (op == '*') {
@@ -17,8 +31,8 @@ long long eval(long long a, long long b, char op) {
 vector <long long int> minandmax(int i,int j,string exp)
 {
 	vector <long long int> res(2);
-    int min1 = 32767;
-   int max1 = -32767;
+    long long int min1 = 32767;
+   long long int max1 = -32767;
    for(int k=i;k<=j-1;k++)
    {
       //  cout<<"check3"<<endl;
@@ -27,8 +41,8 @@ vector <long long int> minandmax(int i,int j,string exp)
        b = eval(dp2[i][k],dp1[k+1][j],exp[k*2 +1]);
        c = eval(dp1[i][k],dp2[k+1][j],exp[k*2 +1]);
        d = eval(dp1[i][k],dp1[k+1][j],exp[k*2 +1]);
-	   min1 = min(min1,min(a,min(b,min(c,d))));
-	   max1 = max(max1,max(a,max(b,max(c,d))));
+	   min1 = minl(min1,minl(a,minl(b,minl(c,d))));
+	   max1 = maxl(max1,maxl(a,maxl(b,maxl(c,d))));
    }
    res[0]=min1;
    res[1]=max1;
