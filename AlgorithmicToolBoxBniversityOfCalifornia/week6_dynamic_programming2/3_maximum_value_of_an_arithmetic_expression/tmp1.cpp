@@ -12,15 +12,24 @@ long long eval(long long a, long long b, char op) {
     assert(0);
   }
 }
-vector <int> minandmax(int i,int j)
+vector <int> minandmax(int i,int j,string &exp)
 {
-   int min = 32767;
-   int max = -32767;
+	vector <int> res(2);
+   int min1 = 32767;
+   int max1 = -32767;
    for(int k=i;k<=j-1;k++)
    {
        int a,b,c,d;
-       a = M
+       a = eval(dp2[i][k],dp2[k+1][j],exp[k]);
+       b = eval(dp2[i][k],dp1[k+1][j],exp[k]);
+       c = eval(dp1[i][k],dp2[k+1][j],exp[k]);
+       d = eval(dp1[i][k],dp1[k+1][j],exp[k]);
+	   min1 = min(min1,min(a,min(b,min(c,d))));
+	   max1 = max(max1,max(a,max(b,max(c,d))));
    }
+   res[0]=min1;
+   res[1]=max1;
+return res;   
 }
 
 long long get_maximum_value(const string &exp) {
@@ -38,7 +47,7 @@ long long get_maximum_value(const string &exp) {
       {
           int j=i+s;
           vector<int> res;
-          res = minandmax(i,j);
+          res = minandmax(i,j,exp);
           dp1[i][j]=res[0];
           dp2[i][j]=res[1];
       }
