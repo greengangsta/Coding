@@ -21,7 +21,7 @@ vector <long long int> minandmax(int i,int j,string exp)
    int max1 = -32767;
    for(int k=i;k<=j-1;k++)
    {
-        cout<<"check3"<<endl;
+      //  cout<<"check3"<<endl;
        int a,b,c,d;
        a = eval(dp2[i][k],dp2[k+1][j],exp[k*2 +1]);
        b = eval(dp2[i][k],dp1[k+1][j],exp[k*2 +1]);
@@ -41,15 +41,15 @@ long long get_maximum_value(const string exp) {
 //  int dp1[n][n],dp2[n][n];
   for(int i=0;i<=n/2;i++)
     {
-        cout<<"check1"<<endl;
+      //  cout<<"check1"<<endl;
         dp1[i][i]=exp[i*2]-'0';
         dp2[i][i]=exp[i*2]-'0';
     }
   for(int s=1;s<=n/2;s++)
    {
-       for(int i=1;i<=n/2-s;i++)
+       for(int i=0;i<=n/2-s;i++)
       {
-           cout<<"check2"<<endl;
+        //   cout<<"check2"<<endl;
           int j=i+s;
           vector<long long int> res(2);
           res = minandmax(i,j,exp);
@@ -57,6 +57,7 @@ long long get_maximum_value(const string exp) {
           dp2[i][j]=res[1];
       }
    }
+ /*  
   for(int i=0;i<=n/2;i++)
   {
       for(int j=0;j<=n/2;j++)
@@ -74,8 +75,8 @@ long long get_maximum_value(const string exp) {
       }
       cout<<endl;
   }
-   
-  return dp2[0][n-1];
+   */
+  return dp2[0][n/2];
 }
 
 int main() {
@@ -83,7 +84,7 @@ int main() {
     cin>>t;
     while(t--)
     {
-         cout<<"case : "<<t<<endl;
+        // cout<<"case : "<<t<<endl;
   string s;
   std::cin >> s;
   std::cout << get_maximum_value(s) << '\n';
