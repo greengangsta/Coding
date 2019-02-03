@@ -8,20 +8,13 @@ int main() {
     {
        int n;
        cin>>n;
-       int a[n];
+       long long int a,count=0;
        for(int i=0;i<n;i++)
-         cin>>a[i];
-       sort(a,a+n);
-       int count=0;
-       for(int i=0;i<n;i++)
-        {
-            if(a[i]>count)
-            count+=a[i]-count;
-            else
-            continue;
-        }
-     
-      cout<<count<<endl;
+       {
+           cin>>a;
+           count+=a-1;
+       }
+       cout<<count+1<<endl;
     }
     
     
