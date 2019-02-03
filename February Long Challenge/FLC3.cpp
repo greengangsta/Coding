@@ -18,7 +18,7 @@ int main() {
         {
             if(i==0&&d[i]>a[n-1]+a[1])
              ans[i]=d[i];
-            else if(i==n-1&&d[i]>a[1]+a[n-2])
+            else if(i==n-1&&d[i]>a[0]+a[n-2])
               ans[i]=d[i];
             else if(i!=0&&i!=n-1&&d[i]>a[i+1]+a[i-1])
               ans[i]=d[i];
@@ -27,9 +27,9 @@ int main() {
         }
        sort(ans,ans+n);
        cout<<ans[n-1]<<endl;
-       for(int i=0;i<n;i++)
-         cout<<ans[i]<<" ";
+     //  for(int i=0;i<n;i++)
+     //    cout<<ans[i]<<" ";
     
-     cout<<endl;
+   //  cout<<endl;
     }
 }
