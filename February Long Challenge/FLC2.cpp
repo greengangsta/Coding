@@ -8,10 +8,11 @@ int main() {
     {
         int n,count=0;
         cin>>n;
+        string s;
         int a[26]={0};
-        for(int i=0;i<n;i++)
+        for(int i=1;i<=n;i++)
           {
-              cin>>s[i];
+              cin>>s;
               for(int j=0;j<s.length();j++)
               {
                   if(a[s[j]-'a']==i-1)
@@ -21,7 +22,7 @@ int main() {
               }
           }
           for(int i=0;i<26;i++)
-            if(a[i]==n-1)
+            if(a[i]==n)
              count++;
              
              cout<<count<<endl;
