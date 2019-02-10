@@ -1,22 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int gcd(int a, int b) 
+long long int gcd(long long int a, long long int b) 
 { 
     if (a == 0) 
         return b; 
     return gcd(b % a, a); 
 } 
-int modInverse(int a, int m) 
+long long int modInverse(long long int a, long long int m) 
 { 
-    int m0 = m; 
-    int y = 0, x = 1; 
+   long long  int m0 = m; 
+    long long int y = 0, x = 1; 
     if (m == 1) 
       return 0; 
     while (a > 1) 
     {
-        int q = a / m; 
-        int t = m; 
+       long long int q = a / m; 
+        long long int t = m; 
         m = a % m, a = t; 
         t = y; 
         y = x - q * y; 
@@ -32,10 +32,10 @@ int main() {
      while(t--)
       {
           long long int mod=1000000007;
-          int n,k,m;
-          int p=0,q=1;
+          long long int n,k,m;
+          long long int p=0,q=1;
           cin>>n>>k>>m;
-         for(int i=1;i<=m;i++)
+         for(long long int i=1;i<=m;i++)
          {
              if(m-i>=1&&n>k)
              {
@@ -44,23 +44,23 @@ int main() {
              else
              {
             
-                   int a=gcd(q-p,q*n);
-                   cout<<"a : "<<a<<endl;
-                    int x=(q-p)/a;
-                    int y=(q*n)/a;
-                    int l =(q*y)/gcd(q,y);
+                   long long int a=gcd(q-p,q*n);
+                  // cout<<"a : "<<a<<endl;
+                   long long int x=(q-p)/a;
+                    long long int y=(q*n)/a;
+                    long long int l =(q*y)/gcd(q,y);
                     p=(p*(l/q)) + (x*(l/y));
                     q=l;
                      n+=k;
-                     cout<<"p/q : "<<p<<'/'<<q<<endl;
-                     cout<<"n : "<<n<<endl;
+                    // cout<<"p/q : "<<p<<'/'<<q<<endl;
+                    // cout<<"n : "<<n<<endl;
              }
          }
          
            cout<<p*modInverse(q,mod)<<endl;
-          
+           //cout<<modInverse(207,mod);
       }
-       
+           
     
     
     
