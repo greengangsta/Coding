@@ -11,17 +11,17 @@ int main()
           x.push(s[i]);
         else if(s[i]==')'||s[i]=='}'||s[i]==']')
         {
-            if(s[i]==')'&&x.top()!='(')
+            if(s[i]==')'&&(x.empty()||x.top()!='('))
             {
                 cout<<i+1<<endl;
                 break;
             }
-            else if(s[i]=='['&&x.top()!=']')
+            else if(s[i]=='['&&(x.empty()||x.top()!=']'))
             {
                 cout<<i+1<<endl;
                 break;
             }
-            else if(s[i]=='{'&&x.top()!='}')
+            else if(s[i]=='{'&&(x.empty()||x.top()!='}'))
             {
                 cout<<i+1<<endl;
                 break;

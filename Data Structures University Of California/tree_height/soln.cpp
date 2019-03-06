@@ -1,27 +1,31 @@
 #include<bits/stdc++.h>
 using namespace std;
+long long int a[100001];
 int main()
 {
-    
+  
       int n;
       cin>>n;
-      int a[n];
-      for(int i=0;i<n;i++)
+      for(long long int i=0;i<n;i++)
       cin>>a[i];
-      int m,h=0;
-      for(int i=0;i<n;i++)
+      long long int m,h=0;
+      for(long long int i=0;i<n;i++)
       {
-         int p=a[i];
-         m=0;
-        while(p!=-1)  
+         long long int p=i;
+         m=1;
+        while(a[p]!=-1)  
           {
               m++;
               p=a[p];
           }
           h=max(m,h);
       }
-     cout<<h+1<<endl;
+     cout<<h<<endl;
     
-  
+     
+    
+
+    
+   
     return 0;
 }
