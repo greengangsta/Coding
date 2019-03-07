@@ -3,10 +3,7 @@ using namespace std;
 
 int main()
 {
-    
-
-    
-    
+  
    int s,n;
    cin>>s>>n;
    int t=s;
@@ -52,10 +49,6 @@ int main()
             }
         }
     }
-    
-   
-
-    
-    
+  
     return 0;
 }
