@@ -48,7 +48,7 @@ int main()
     }
     int root= build_tree(a,n);
     int h= BFS(root);
-    cout<<h<<endl;
+    cout<<h+1<<endl;
     
     
     return 0;
