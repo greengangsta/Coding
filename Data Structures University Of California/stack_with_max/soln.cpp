@@ -17,7 +17,7 @@ int main()
           x.push(a);
           if(y.empty())
            y.push(a);
-          else if(y.top()<a)
+          else if(y.top()<=a)
           y.push(a);
       }
       else if(s=="pop")
