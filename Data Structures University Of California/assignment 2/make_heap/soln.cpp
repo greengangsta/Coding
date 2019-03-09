@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-void min_heap(int a[],int j,int n,int &count)
+void min_heap(int a[],int j,int n,int &count,int pairs [][2],int &k)
 {
           int min =j;
           int l=2*j+1;
@@ -11,9 +11,12 @@ void min_heap(int a[],int j,int n,int &count)
                min = r;
           if(min!=j)
             {
-                swap(a[j],a[min]);
-                   count++;
-                min_heap(a,min,n,count);
+                 pairs[k][0] = a[j];
+                 pairs[k][1] = a[min];
+                 k++;
+                 swap(a[j],a[min]);
+                 count++;
+                 min_heap(a,min,n,count,pairs,k);
             }
 }
 
@@ -22,15 +25,16 @@ int main()
      
      int n;
      cin>>n;
-     int a[n];
+     int a[n],k=0;
+     int pairs[4*n][2];
      for(int i=0;i<n;i++)
        cin>>a[i];
        int count=0;
      for(int j = n/2;j>=0;j--)
-      min_heap(a,j,n,count);
+      min_heap(a,j,n,count,pairs,k);
      cout<<count<<endl;
          for(int i=0;i<count;i++)
-         cout<<0<<" "<<0<<endl;
+         cout<<pairs[i][0]<<" "<<pairs[i][1]<<endl;
      
      
      return 0;
