@@ -1,7 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-int count=0;
-void min_heap(int a[],int j,int n)
+void min_heap(int a[],int j,int n,int &count)
 {
           int min =j;
           int l=2*j+1;
@@ -14,7 +13,7 @@ void min_heap(int a[],int j,int n)
             {
                 swap(a[j],a[min]);
                    count++;
-                min_heap(a,min,n);
+                min_heap(a,min,n,count);
             }
 }
 
@@ -26,9 +25,12 @@ int main()
      int a[n];
      for(int i=0;i<n;i++)
        cin>>a[i];
-     for(int j = n/2;j>0;j--)
-       min_heap(a,j,n);
+       int count=0;
+     for(int j = n/2;j>=0;j--)
+      min_heap(a,j,n,count);
      cout<<count<<endl;
+         for(int i=0;i<count;i++)
+         cout<<0<<" "<<0<<endl;
      
      
      return 0;
