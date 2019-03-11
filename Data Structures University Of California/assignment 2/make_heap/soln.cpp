@@ -11,8 +11,8 @@ void min_heap(int a[],int j,int n,int &count,int pairs [][2],int &k)
                min = r;
           if(min!=j)
             {
-                 pairs[k][0] = a[j];
-                 pairs[k][1] = a[min];
+                 pairs[k][0] = j;
+                 pairs[k][1] = min;
                  k++;
                  swap(a[j],a[min]);
                  count++;
