@@ -102,9 +102,12 @@ int  main()
             {
                if(h->next->c==s)
                 {
-                  h->next = h->next->next;
-                  h->next->c = "";
-                  h->next->next = NULL;
+                  node *b;
+                  b = h->next;
+                  h->next =b->next;
+                  b->c = "";
+                  b->next = NULL;
+                  break;
                 }
                 h =h->next;
             }
