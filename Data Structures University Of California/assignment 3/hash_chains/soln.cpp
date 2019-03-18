@@ -7,34 +7,42 @@ struct node
     node* next;
 };
 
-int power(int a,int i)
+long long int  power(long long int  a,long long int  i)
 {
-    int mod=1000000007;
-    while(i--)
-     a*=a%mod;
-    return a;
+    long long int b=1;
+    while(i>0)
+    {
+	 b=b*a;
+	 i--;
+    }
+    return b;
 }
 
-int cal_hash(string s)
+long long int  cal_hash(string s)
 {
-    int mod=1000000007;
-    int l =s.length();
-    int val=0;
-    for(int i=0;i<l;i++)
+    long long int  mod=1000000007;
+    long long int  l =s.length();
+    long long int  val=0;
+    for(long long int  i=0;i<l;i++)
     {
-      val+=((int)s[i]*power(263,i))%mod;
+      long long int p;
+      p = (int)s[i];
+      val+= p*power(263,i);
     }
-    return val;
+    return val%mod;
 }
-int main()
+int  main()
 {
 	
-	int n;
-    int m;
+	long long int  n;
+    long long int  m;
     cin>>m;
     cin>>n;
-    node hash[m];
-    for(int i=0;i<n;i++)
+    node temp;
+    temp.c="";
+    temp.next=NULL;
+    node hash[m]={temp};
+    for(long long int  i=0;i<n;i++)
     {
         string q;
         cin>>q;
@@ -42,8 +50,8 @@ int main()
         {
           string s;
           cin>>s;
-          int id = cal_hash(s);
-          int flag=0;
+          long long int  id = cal_hash(s)%m;
+          long long int  flag=0;
           node *h ;
           h = &hash[id];
           while(h->c!=s && h->next!=NULL)
@@ -60,9 +68,9 @@ int main()
             h=&hash[id];
             node* a = new node;
             a->c=h->c;
-            a->next=hash[id]->next;
-            hash[id]->c=s;
-            hash[id]->next=a;
+            a->next=h->next;
+            h->c=s;
+            h->next=a;
           }
           
         }
@@ -70,7 +78,7 @@ int main()
         {
             string s;
             cin>>s;
-            int id = cal_hash(s);
+            long long int  id = cal_hash(s)%m;
             node *h ;
             h = &hash[id];
             while(h->c!=s && h->next!=NULL)
@@ -78,7 +86,7 @@ int main()
                if(h->c==s)
                 {
                   h->c= h->next->c;
-                  h-next = h->next->next;
+                  h->next = h->next->next;
                   h->next->c = "\0";
                   h->next->next = NULL;
                 }
@@ -90,8 +98,8 @@ int main()
         {
             string s;
             cin>>s;
-            int id = cal_hash(s);
-            int flag=0;
+            long long int  id = cal_hash(s)%m;
+            long long int  flag=0;
             node *h ;
             h = &hash[id];
             while(h->c!=s && h->next!=NULL)
@@ -102,20 +110,23 @@ int main()
                   flag =1;
                   break;
                }
+               h = h->next;
+            }
               if(flag==0)
               cout<<"no"<<endl;
-            }
+            
             
         }
         else if(q=="check")
         {
-            int a;
+            long long int  a;
             cin>>a;
             node *h ;
             h = &hash[a];
             while(h->next!=NULL)
             {
                 cout<<h->c<<" ";
+                h = h->next;
             }
             cout<<endl;
         }
