@@ -9,10 +9,11 @@ struct node
 
 long long int  power(long long int  a,long long int  i)
 {
+    long long int  mod=1000000007; 
     long long int b=1;
     while(i>0)
     {
-	 b=b*a;
+	 b=((b%mod)*(a%mod))%mod;
 	 i--;
     }
     return b;
@@ -27,8 +28,9 @@ long long int  cal_hash(string s)
     {
       long long int p;
       p = (int)s[i];
-      val+= p*power(263,i);
+      val+=((p%mod)*(power(263,i)%mod))%mod;
     }
+
     return val%mod;
 }
 int  main()
@@ -39,11 +41,14 @@ int  main()
     cin>>m;
     cin>>n;
     node temp;
-    temp.c="";
+    temp.c="1";
     temp.next=NULL;
-    node hash[m]={temp};
+    node hash[m];
+    for(int i=0;i<m;i++)
+     hash[i]=temp;
     for(long long int  i=0;i<n;i++)
     {
+       
         string q;
         cin>>q;
         if(q=="add")
@@ -54,9 +59,13 @@ int  main()
           long long int  flag=0;
           node *h ;
           h = &hash[id];
+          if(h->c==s)
+          {
+              flag =1;
+          }
           while(h->c!=s && h->next!=NULL)
           {
-              if(h->c==s)
+              if(h->next->c==s)
                {
                    flag=1;
                    break;
@@ -81,18 +90,24 @@ int  main()
             long long int  id = cal_hash(s)%m;
             node *h ;
             h = &hash[id];
+            if(h->c==s)
+            {
+                node* a =h->next;
+                h->c="";
+                h->next=NULL;
+                h->c= a->c;
+                h->next =a->next;
+            }
             while(h->c!=s && h->next!=NULL)
             {
-               if(h->c==s)
+               if(h->next->c==s)
                 {
-                  h->c= h->next->c;
                   h->next = h->next->next;
-                  h->next->c = "\0";
+                  h->next->c = "";
                   h->next->next = NULL;
                 }
                 h =h->next;
             }
-            
         }
         else if(q=="find")
         {
@@ -102,9 +117,14 @@ int  main()
             long long int  flag=0;
             node *h ;
             h = &hash[id];
+            if(h->c==s)
+             {
+                 cout<<"yes"<<endl;
+                 flag=1;
+             }
             while(h->c!=s && h->next!=NULL)
             {
-              if(h->c==s)
+              if(h->next->c==s)
                {
                   cout<<"yes"<<endl;
                   flag =1;
@@ -114,7 +134,6 @@ int  main()
             }
               if(flag==0)
               cout<<"no"<<endl;
-            
             
         }
         else if(q=="check")
@@ -129,9 +148,12 @@ int  main()
                 h = h->next;
             }
             cout<<endl;
+            
         }
-        
+       
+
     }
+    
 	
 	
 	return 0;
