@@ -4,7 +4,7 @@ using namespace std;
 string t,p;
 long long int  fastpower(long long int  a,long long int  i)
 {
-    long long int  mod=1000000007; 
+    long long int  mod=100000000007; 
     long long int b=1;
      if(i==0)
       return 1;
@@ -18,14 +18,14 @@ long long int  fastpower(long long int  a,long long int  i)
 }
 long long int  cal_hash(string s)
 {
-    long long int  mod=1000000007;
+    long long int  mod=100000000007;
     int  l=s.length();
     long long int  val=0;
     for(int  i=0;i<l;i++)
     {
        int p;
        p = (int)s[i];
-       val+=((p%mod)*(fastpower(263,i)%mod))%mod;
+       val+=((p%mod)*(fastpower(1,i)%mod))%mod;
     }
 
     return val%mod;
@@ -49,23 +49,33 @@ int main()
 	char s[pl+1];
 	long long int h,h1;
 	h = cal_hash(p);
-	for(int i=tl -1,j=0;i>tl -pl,j<pl;i--,j++)
+	for(int i=tl-1,j=0;i>tl -pl,j<pl;i--,j++)
 		s[j]=t[i];
 	s[pl]='\0';
 	h1 = cal_hash(s);
-
-	for(int i=tl -pl;i>=0;i--)
+	//cout<<h<<" "<<h1<<endl;
+    long long int mod=100000000007;
+	for(int i=tl-pl;i>=0;i--)
 	{
 	  if(h==h1)
 	    {
 		  if(match(i,p))
-			  ans.push_back(i);
+			  {
+			      ans.push_back(i);
+			      //cout<<i<<endl;
+			  }
 	    } 
-	   h1= (h1 - (int)t[i+pl]*fastpower(263,pl)  )*263 + (int)t[i];
+	   long long int x =(((int)t[i+pl-1]%mod)*(fastpower(1,pl-1)%mod))%mod;
+	  // cout<<x<<endl;
+	   int y =(int)t[i-1];
+	   h1 = ((h1-x)%mod + mod)%mod;
+	   h1= (((h1%mod)*(1%mod))%mod + y)%mod;
+	   
+	 //  cout<<h1<<endl; 
 	}
 	sort(ans.begin(),ans.end());
 	for(int i=0;i<ans.size();i++)
-	 cout<<ans[i]<<endl;
+	 cout<<ans[i]<<" ";
 }
 
 
