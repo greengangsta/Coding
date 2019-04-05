@@ -17,10 +17,14 @@ int main()
        int j=0,k;
        for(int i=0;i<s.length();i++)
         {
-            if(s[i]==x)
+            if(s[i]!=x)
             {
-             sum+=((i-j)*(i-j-1))/2;
-             j=i;
+              j++;
+            }
+            if(s[i]==x||i==n-1)
+            {
+             sum+=((j)*(j+1))/2;
+             j=0;
             }
         }
         
