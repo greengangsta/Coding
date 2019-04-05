@@ -7,14 +7,14 @@ int main()
    cin>>t;
    while(t--)
    {
-       int n;
+       long long int n;
        cin>>n;
        string s;
        long long int sum=0,total;
        char x;
-       cin>>s;
-       cin>>x;
-       int j=0,k;
+       cin>>s>>x;
+       long long int j=0,k;
+       n = s.length();
        for(int i=0;i<s.length();i++)
         {
             if(s[i]!=x)
