@@ -2,33 +2,37 @@
 using namespace std;
 
 struct node{
-    int key;
-    int left;
-    int right;
+    long long int  key;
+    long long int  left;
+    long long int  right;
 };
 
-//vector <int> in;
-int isBSTUtil(int i, int min, int max,node tree[])  
+//vector <long long int > in;
+long long int  isBSTUtil(long long int  i, long long int  min, long long int  max,node tree[])  
 {  
-  if (tree[i].left==-1&&tree[i].right==-1)  
-     return 1; 
-  if (tree[i].key < min || tree[i].key > max)  
+  if (i!=-1&&(tree[i].key < min || tree[i].key >= max))  
      return 0;  
+   if (i==-1||(tree[i].left==-1&&tree[i].right==-1))  
+     return 1; 
   return 
-    isBSTUtil(tree[i].left, min,tree[i].key-1,tree) &&
-    isBSTUtil(tree[i].right, tree[i].key+1, max,tree); 
+    isBSTUtil(tree[i].left, min,tree[i].key,tree) &&
+    isBSTUtil(tree[i].right, tree[i].key, max,tree); 
 }  
-int isBST(int i,node tree[])  
+long long int  isBST(long long int  i,node tree[])  
 {  
-  return(isBSTUtil(i, INT_MIN, INT_MAX,tree));  
+  return(isBSTUtil(i, -2147483648,2147483648,tree));  
 }  
- main()
+ int  main()
 {
-    int n;
+    long long int  n;
     cin>>n;
     node tree[n];
-    int a[n];
-    for(int i=0;i<n;i++)
+    long long int  a[n];
+    if(n==0||n==1)
+     cout<<"CORRECT"<<endl;
+     else
+     {
+    for(long long int  i=0;i<n;i++)
      {
          cin>>a[i];
          tree[i].key=a[i];
@@ -39,5 +43,6 @@ int isBST(int i,node tree[])
      cout<<"CORRECT"<<endl;
      else
      cout<<"INCORRECT"<<endl;
+     }
     return 0;
 }
