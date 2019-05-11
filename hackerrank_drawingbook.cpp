@@ -9,17 +9,19 @@ int n,p;
   cin>>p;
   int front=1,back=n;
   int c1=0,c2=0;
-  for(int i=1;i<p;i++)
+  for(int i=1;i<=p;i++)
   {
       if(front==p||front==p+1)
         break;
       front+=2;
       c1++;
   }
-  for(int i=n;i>=p-1;i--)
+  for(int i=n;i>0;i--)
   {
-      if(back==p||back==p+1)
+      if(back==p||(back==p+1&&i!=n)||back==p-1)
         break;
+      else if(back==p)
+       break;
        back-=2;
        c2++;
   }
