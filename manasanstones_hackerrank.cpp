@@ -9,27 +9,32 @@ int main()
    {
        int n,a,b;
        cin>>n>>a>>b;
+     //  cout<<n<<" "<<a<<" "<<b;
        unordered_set <int> s1,s2;
        s1.insert(0);
-       int flag = 0;
+       int flag=0;
        while(n--)
        {
            if(flag==0)
            {
            for(auto it = s1.begin();it!=s1.end();it++)
              {
-                 s2.insert(it->value+a);
-                 s2.insert(it->value+b)';'
+                 s2.insert(*it+a);
+                 s2.insert(*it+b);
              }
+             if(n!=0)
+             s1.clear();
             flag=1;
            }
            else
            {
             for(auto it = s2.begin();it!=s2.end();it++)
              {
-                 s1.insert(it->value+a);
-                 s1.insert(it->value+b)';'
+                 s1.insert(*it+a);
+                 s1.insert(*it+b);
              }
+             if(n!=0)
+             s2.clear();
             flag=0;
            }
 
@@ -40,12 +45,12 @@ int main()
             int i=0;
          for (auto it = s2.begin(); it != s2.end(); it++)
           {
-              arr[i] = it->value;
+              arr[i] = *it;
               i++;
           }
-          sort(a,a+n);
-          for(int i=0;i<n;i++)
-           cout<<a[i]<<" ";
+          sort(arr,arr+i);
+          for(int j=0;j<i;j++)
+           cout<<arr[j]<<" ";
            cout<<endl;
         }
         else
@@ -53,12 +58,12 @@ int main()
             int i=0;
          for (auto it = s1.begin(); it != s1.end(); it++)
           {
-              arr[i] = it->value;
+              arr[i] = *it;
               i++;
           }
-          sort(a,a+n);
-          for(int i=0;i<n;i++)
-           cout<<a[i]<<" ";
+          sort(arr,arr+i);
+          for(int j=0;j<i;j++)
+           cout<<arr[j]<<" ";
            cout<<endl;
         }
    }
