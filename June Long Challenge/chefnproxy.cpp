@@ -24,16 +24,20 @@ int main()
         p = (float)count/(float)l;
         if(p>=0.75)
          cout<<0<<endl;
+         
         else
         {
                 for(int i=2;i<l-2;i++)
                  {
-                     if((s[i-1]=='P'||s[i-2]=='P')&&(s[i+1]=='P'&&s[i+2]=='P')&&s[i]=='A')
+                     if(s[i]=='A')
                      {
+                      if((s[i-1]=='P'||s[i-2]=='P')&&(s[i+1]=='P'||s[i+2]=='P'))
+                       {
                          count++;
                          p = (float)count/float(l);
                          if(p>=0.75)
                           break;
+                       }
                      }
                  }
            if(p>=0.75)
