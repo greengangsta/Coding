@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool isdiv(int n)
+bool isdiv(unsigned long long int n)
 {
    int sum=0;
    while(n)
@@ -21,17 +21,17 @@ int main()
     cin>>t;
     while(t--)
     {
-    int num,n;
+    unsigned long long int n;
     cin>>n;
-    for(int i=1,j=1;j<=n;i++)
+    for(unsigned long long int i = n*10;i<=(n*10)+10;i++)
     {
-        if(isdiv(i))
-        {
-            num=i;
-            j++;
-        }
+      if(isdiv(i))
+      {
+          cout<<i<<endl;
+          break;
+      }
     }
-    cout<<num<<endl;
+    
     }
     
     return 0;
