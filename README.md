@@ -8,3 +8,7 @@ Algorithms<br>
 Coursera (Online)<br>
 Nov 2018 - Jan 2019<br>
 Algorithms implementation MOOC on coursera by University of California , San Diego. Learning to implement algorithms and solve competitive programming questions<hr>.
+Codechef <br>
+C++ files for the problems solved during the codechef challenges(cook off, lunch time and long challenge)<hr>
+Hackerrank<br>
+C++ files for the problems solved on hackerrank coding platform.
