@@ -10,34 +10,67 @@ int main()
        int n,k;
        cin>>n;
        cin>>k;
-       int c ;
-       c = k%n;
-       int a[n];
-       for(int i=0;i<n;i++)
+       if(n==1)
        {
-           a[i] = k/n;
+           cout<<k<<endl;
        }
-       int j = 0;
-       while(c!=0 && j<n)
+       else
        {
-           a[j] +=1;
-           j+=2;
-           c--;
+           int n1,n2;
+           n1 = k/2;
+           n2 = k-n1;
+            int a[n] = {0};
+            int b[2];
+            b[0] = n1;
+            b[1] = n2;
+            if(n%2==0)
+            {
+                int j = 1;
+                int i =0;
+                while(i<2&&j<n)
+                {
+                 a[j] +=b[i];
+                 j+=2;
+                 i++;
+                }
+                j = 0;
+                 while(i<2&&j<n)
+                {
+                 a[j] +=b[i];
+                 j+=2;
+                 i++;
+                }
+            }
+            else
+            {
+               int j = 0;
+                int i =0;
+                while(i<2&&j<n)
+                {
+                 a[j] +=b[i];
+                 j+=2;
+                 i++;
+                }
+                j = 1;
+                 while(i<2&&j<n)
+                {
+                 a[j] +=b[i];
+                 j+=2;
+                 i++;
+                }
+            }
+                int sum = 0;
+            for(int i=0;i<n-1;i++)
+            {
+                sum += abs(a[i]-a[i+1]);
+            }
+            //for(int i=0;i<n;i++)
+            //cout<<a[i]<<" ";
+           // cout<<endl;
+            cout<<sum<<endl;
+            
        }
-     //  cout<<c<<endl;
-       j = 0;
-       while(c!=0 && j<n)
-       {
-           a[j] +=1;
-           j+=2;
-           
-       }
-       int sum = 0;
-       for(int i=0;i<n-1;i++)
-       {
-           sum += abs(a[i]-a[i+1]);
-       }
-       cout<<sum<<endl;
+      
     }
     
     
