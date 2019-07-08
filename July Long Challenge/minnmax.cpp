@@ -1,4 +1,6 @@
 #include<bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp> 
+using boost::multiprecision::cpp_int; 
 using namespace std;
 
 int main()
@@ -7,7 +9,7 @@ int main()
     cin>>t;
     while(t--)
     {
-        int n,k;
+        cpp_int n,k;
         cin>>n>>k;
         if(n>=k)
         {
