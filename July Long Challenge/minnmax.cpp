@@ -7,71 +7,53 @@ int main()
     cin>>t;
     while(t--)
     {
-       int n,k;
-       cin>>n;
-       cin>>k;
-       if(n==1)
-       {
-           cout<<k<<endl;
-       }
-       else
-       {
-           int n1,n2;
-           n1 = k/2;
-           n2 = k-n1;
-            int a[n] = {0};
-            int b[2];
-            b[0] = n1;
-            b[1] = n2;
-            if(n%2==0)
+        int n,k;
+        cin>>n>>k;
+        if(n>=k)
+        {
+            if(n%2!=0)
             {
-                int j = 1;
-                int i =0;
-                while(i<2&&j<n)
-                {
-                 a[j] +=b[i];
-                 j+=2;
-                 i++;
-                }
-                j = 0;
-                 while(i<2&&j<n)
-                {
-                 a[j] +=b[i];
-                 j+=2;
-                 i++;
-                }
+                if(k<=n-k)
+                 cout<<2*k<<endl;
+                else
+                 cout<< 2*(n-k)<<endl;
             }
             else
             {
-               int j = 0;
-                int i =0;
-                while(i<2&&j<n)
-                {
-                 a[j] +=b[i];
-                 j+=2;
-                 i++;
-                }
-                j = 1;
-                 while(i<2&&j<n)
-                {
-                 a[j] +=b[i];
-                 j+=2;
-                 i++;
-                }
+                if(k==n-k)
+                 cout<<(2*k) - 1<<endl;
+                else if (k < n-k)
+                 cout<< 2*k <<endl;
+                else
+                 cout<< 2*(n-k)<<endl;
+                
             }
-                int sum = 0;
-            for(int i=0;i<n-1;i++)
+        }
+        else
+        {
+            k = k%n;
+            if(n%2!=0)
             {
-                sum += abs(a[i]-a[i+1]);
+                if(k<=n-k)
+                 cout<<2*k<<endl;
+                else
+                 cout<< 2*(n-k)<<endl;
             }
-            //for(int i=0;i<n;i++)
-            //cout<<a[i]<<" ";
-           // cout<<endl;
-            cout<<sum<<endl;
+            else
+            {
+                if(k==n-k)
+                 cout<<(2*k) - 1<<endl;
+                else if (k < n-k)
+                 cout<< 2*k <<endl;
+                else
+                 cout<< 2*(n-k)<<endl;
+                
+            }
             
-       }
-      
+        }
+        
     }
+    
     
     
     
