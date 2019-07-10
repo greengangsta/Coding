@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+/*
 int parity(int n)
 {
     if(n==0)
@@ -11,7 +12,7 @@ int parity(int n)
      return  1 - parity(n/2);
      
 }
-
+*/
 
 int main()
 {
@@ -27,14 +28,19 @@ int main()
             cin>>x;
             int c1 = 0,c2 = 0;
             s.insert(x);
+            vector <int> v1;
             for(auto it = s.begin();it!= s.end();it++)
             {
                     if(*it != x)
-                    s.insert(*it ^ x);
+                     v1.push_back(*it ^ x);
+                   // s.insert(*it ^ x);
             }
+            for(auto it = v1.begin();it!=v1.end();it++)
+              s.insert(*it);
              for(auto it = s.begin();it!= s.end();it++)
             {
-                 if(parity(*it)==0)
+                bitset <32> b1(*it); 
+                 if(b1.count()%2==0)
                      c1 ++;
                     else
                      c2 ++;
