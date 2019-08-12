@@ -1,16 +1,24 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int bin_pos(int a[],int low,int high,int num)
+
+vector<int> bin_pos(int a[],int low,int high,int num)
 {
+
    int mid = (low + high)/2;
     if(low == high)
     {
-        return low;
+        vector<int> ans(2);
+         ans[0] = low;
+         ans[1] = 0;
+        return ans;
     }
     if(a[mid]== num)
     {
-        return mid;
+         vector<int> ans(2);
+         ans[0] = mid;
+         ans[1] = 1;
+        return ans;
     }
     else if(a[mid] > num)
     {
@@ -48,7 +56,16 @@ int main()
      cin>>b[i];
     for(int i = 0;i<m;i++)
     {
-        cout<< k - bin_pos(a,0,k,b[i]) + 1;
+         vector<int> ans(2);
+        ans = bin_pos(a,0,k,b[i]);
+        if(ans[1]==0)
+         {
+          cout<<k - ans[0] + 1;
+         }
+        else
+        {
+          cout<<k - ans[0];
+        }
         cout<<endl;
     }
 
