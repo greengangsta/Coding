@@ -4,27 +4,33 @@ using namespace std;
 int flag = 0;
 vector<int> reachable(vector <vector<int>> adj,int u,vector <int> visited,int init)
 {
+    visited[u] = 1;
     for(int i = 0;i<adj[u].size();i++)
     {
-       // cout<<"check inner loop"<<endl;
         if(adj[u][i] == init)
         {
-         //    cout<<"check inner condition"<<endl;
+           // cout<<"check inner condition"<<endl;
             flag = 1;
             return visited;
         }
+         
         else if(visited[adj[u][i]]==0 && flag == 0)
+        {
+           // cout<<"check inner loop"<<endl;
           visited = reachable(adj,adj[u][i],visited,init);
+        }
     }
    
     return visited;
 }
 
 
-int  cycle(vector <vector<int>> adj,vector <int> visited)
+int  cycle(vector <vector<int>> adj,vector <int> visited,int n)
 {
     for(int i = 0;i<adj.size();i++)
     {
+         for(int j = 0;j<n;j++)
+            visited.push_back(0);
         int init = i;
         if(visited[i]==0)
          {
@@ -50,7 +56,7 @@ int main()
    vector<int > visited(n);
    for(int i = 0;i<n;i++)
      visited.push_back(0);
-   int flag = cycle(adj,visited);
+   int flag = cycle(adj,visited,n);
    cout<<flag<<endl;
     
     
