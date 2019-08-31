@@ -41,7 +41,9 @@ int main()
              }
         }
     }
-
+   if(l==1)
+    cout<<0<<endl;
+   else
    cout<<max<<endl;
 
 
