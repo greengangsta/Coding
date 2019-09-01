@@ -14,7 +14,56 @@ int main()
     for(int j=0;j<m;j++)
     {
        if(a[i][j]>0)
-       sum += 2;
+       sum += 2;#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int h,w,b[101][101]={0},z=0,y;
+    cin>>h>>w;
+    for(int i=0;i<h;i++)
+    {
+        for(int j=0;j<w;j++)
+        {
+            cin>>b[i][j];
+        }
+    }
+    for(int j=0;j<h;j++)
+    {
+        for(int i=1;i<w+1;i++)
+    {
+        y=b[j][i]-b[j][i-1];
+        if(y<0)
+        {
+            y=-y;
+        }
+        z+=y;
+    }
+    }
+    for(int i=1;i<h+1;i++)
+    {
+        for(int j=0;j<w;j++)
+        {
+            y=b[i][j]-b[i-1][j];
+            if(y<0)
+            {
+                y=-y;
+            }
+            z+=y;
+        }
+    }
+    z+=2*(h*w);
+    for(int j=0;j<w;j++)
+    {
+        z+=b[0][j];
+    }
+    for(int i=0;i<h;i++)
+    {
+        z+=b[i][0];
+    }
+    cout<<z;
+
+}
     }
   for(int i=0;i<n;i++)
   {
