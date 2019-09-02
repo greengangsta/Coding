@@ -9,45 +9,42 @@ int main()
    {
        int n,k;
        cin>>n>>k;
-       unordered_set<int> s1;
-       int a[n+1];
-       for(int i=1;i<=n;i++)
-       {
-         s1.insert(i);
-         a[i] = i;
-       }
+       int a[n+1];    
        int flag = 0;
        for(int i=1;i<=n;i++)
        {
-           int x,y;
-           x = abs(k+i);
-           y = abs(i-k);
-           if(s1.find(x)!=s1.end())
-           {
-             a[i] = x;
-             s1.erase(x);
-           }
-           else if(s1.find(y)!=s1.end())
-           {
-              a[i] = y;
-             s1.erase(y); 
-           }
-           else
-           {
-              flag  = -1;
-              break; 
-           }
+         a[i] = i;
        }
-       if(flag==-1)
-        cout<<flag<<endl;
+       if(k!=0 && n%(2*k)==0)
+       for(int i=0;i<=n;i+=2*k)
+       {
+         if(i+2*k<=n)
+          for(int j=i+1;j<=i+k;j++)
+          {
+              int temp = a[j];
+              a[j] = a[j+k];
+              a[j+k] = temp;
+          }
+       }
+       else if(k!=0 && n%(2*k)!=0)
+        flag = 1;
+       for(int i=1;i<=n;i++)
+         if(abs(a[i]-i) != k)
+          {
+              flag = 1;
+              break;
+          }
+    
+       if(flag==1)
+        cout<<-1;
        else
        {
-           for(int i=1;i<=n;i++)
-           {
-               cout<<a[i]<<" ";
-           }
-         cout<<endl;
+       for(int i=1;i<=n;i++)
+        cout<<a[i]<<" ";
        }
+       
+       cout<<endl;
+    
    }
 
 
