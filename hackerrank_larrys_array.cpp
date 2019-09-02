@@ -1,16 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int is_sorted(int a[],int l,int h)
-{
-  for(int i=l;i<h;i++)
-   {
-       if(a[i]>a[i+1])
-        return 0;
-   }
-   return 1;
-}
-
 int main()
 {
    int t;
@@ -19,41 +9,31 @@ int main()
     {
         int n;
         cin>>n;
+        int N = n;
+        int w = 3;
+        int q = n/3;
+         q++;
+        n = n*q-1;
         int a[n];
-        for(int i=0;i<n;i++)
-         cin>>a[i];
-        int flag = 0;
-        for(int i=n-3;i>=0;i-=1)
+        for(int i=0;i<N;i++)
         {
-            flag = 0;
-            if(is_sorted(a,i,i+3))
-             continue;
-            else 
-             {
-                for(int j=0;j<3;j++)
-                {
-                 int temp = a[i];
-                 a[i] = a[i+1];
-                 a[i+1] = a[i+2];
-                 a[i+2] = temp;
-                 if(is_sorted(a,i,i+3))
-                  {
-                      flag = 1;
-                      break;
-                  }
-                }
-             }
-             if(flag==0)
-              break;
+            cin>>a[i];
         }
-        if(is_sorted(a,0,n))
-         flag = 1;
-        if(flag==0)
-         cout<<"NO"<<endl;
-        else
-         cout<<"YES"<<endl;
+        for(int i = N;i<n;i++)
+            a[i] = i+1;
+        int inv = 0;
         for(int i=0;i<n;i++)
-          cout<<a[i]<<" ";
+         for(int j=i+1;j<n;j++)
+         {
+              if(a[i]>a[j])
+               inv++;
+         }
+        if(inv%2==0)
+         cout<<"YES"<<endl;
+        else 
+         cout<<"NO"<<endl;
+        
+    
     }
 
 
