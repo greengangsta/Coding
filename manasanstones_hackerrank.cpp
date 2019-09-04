@@ -1,78 +1,44 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main()
-{ 
+int main() {
+   
    int t;
    cin>>t;
-   while(t>0)
-   {
-       t--;
-       int n,a,b;
-       cin>>n>>a>>b;
-     //  cout<<n<<" "<<a<<" "<<b;
-       unordered_set <int> s1,s2;
-       s1.insert(0);
-       int flag=0;
-       while(n>0)
-       {
-           n--;
-           if(flag==0)
-           {
-           for(auto it = s1.begin();it!=s1.end();it++)
-             {
-                 s2.insert(*it+a);
-                 s2.insert(*it+b);
-                // cout<<"check : 1";
-             }
-             if(n!=0)
-             s1.clear();
-            flag=1;
-           }
-           else
-           {
-            for(auto it = s2.begin();it!=s2.end();it++)
-             {
-                 s1.insert(*it+a);
-                 s1.insert(*it+b);
-                // cout<<"check : 2";
-             }
-             if(n!=0)
-             s2.clear();
-            flag=0;
-           }
-
-       }
-       int arr[n];
-       if(flag==0)
+   while(t--)
+    {
+        int n,a,b;
+        cin>>n>>a>>b;
+        set <int> s1;
+        if(a<b)
         {
-            int i=0;
-         for (auto it = s2.begin(); it != s2.end(); it++)
+          s1.insert((n-1)*a);
+          n--;
+          while(n--)
           {
-              arr[i] = *it;
-              i++;
-            //  cout<<"check : 3";
+              auto it = s1.rbegin();
+              int val = *it - a;
+              s1.insert(val + b);
           }
-          sort(arr,arr+i);
-          for(int j=0;j<i;j++)
-           cout<<arr[j]<<" ";
-           cout<<endl;
         }
         else
         {
-            int i=0;
-         for (auto it = s1.begin(); it != s1.end(); it++)
+          s1.insert((n-1)*b);
+          n--;
+          while(n--)
           {
-              arr[i] = *it;
-              i++;
-             // cout<<"check : 4";
+              auto it = s1.rbegin();
+              int val = *it - b;
+              s1.insert(val + a);
           }
-          sort(arr,arr+i);
-          for(int j=0;j<i;j++)
-           cout<<arr[j]<<" ";
-           cout<<endl;
         }
-   }
+        for(auto it = s1.begin();it!=s1.end();it++)
+          cout<<*it<<" ";
+        cout<<endl;
+        s1.clear();
+    }
 
-    return 0;
+
+
+  return 0;
 }
