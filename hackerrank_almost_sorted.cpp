@@ -49,13 +49,28 @@ int main()
         }
         if(count==1)
          {
-             cout<<"yes"<<endl;
-             cout<<"swap "<<id+1<<" "<<id1+1<<endl;
+             int temp;
+             temp = a[id];
+             a[id]  = a[id1];
+             a[id1] = temp;
+             if(is_sorted(a,0,n))
+             {
+              cout<<"yes"<<endl;
+              cout<<"swap "<<id+1<<" "<<id1+1<<endl;
+             }
+             else 
+             cout<<"no"<<endl;
          }
-        else if(is_rev_sorted(a,id,id1))
+        else if(is_rev_sorted(a,id,id1+1))
         {
+            sort(a+id,a+id1+1);
+            if(is_sorted(a,0,n))
+            {
             cout<<"yes"<<endl;
              cout<<"reverse "<<id+1<<" "<<id1+1<<endl;
+            }
+            else
+             cout<<"no"<<endl;
         }
         else
          cout<<"no"<<endl;
