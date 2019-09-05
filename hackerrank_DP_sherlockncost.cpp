@@ -20,7 +20,7 @@ int main()
         for(int i=1;i<n;i++)
         {
            l[i] = max(l[i-1],h[i-1]+ abs(b[i-1]-1));
-           h[i] = max(h[i-1]+ b[i]-b[i-1],l[i-1]+abs(b[i-1]-1));
+           h[i] = max(h[i-1]+ abs(b[i]-b[i-1]),l[i-1]+abs(b[i]-1));
            f[i] = max(l[i],h[i]);
         }
         cout<<f[n-1]<<endl;
