@@ -1,0 +1,84 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+     int ws;
+     cin>>ws;
+    double mavg; 
+    queue<double> q; 
+    cout.setf(ios::fixed,ios::floatfield);
+    cout.precision(4);
+    for(int i=0;i<ws;i++)
+    {
+
+        double a;
+        cin>>a;
+        q.push(a);
+        mavg += a;
+    }
+    mavg /= ws;
+    cout<<mavg<<endl;
+    double a;
+    while(cin>>a)
+    {
+        mavg += a/(double)ws;
+        double last = q.front();
+        q.pop();
+        mavg -= last/double(ws);
+        cout<<mavg<<endl;
+        q.push(a);
+    }
+
+
+
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+   cout.setf(ios::fixed,ios::floatfield);
+   cout.precision(3);
+   int ws;
+   cin>>ws;
+   double a,p;
+   cin>>p;
+   double med;
+   vector<double> arr;
+   while(cin>>a)
+   {
+    arr.push_back(a);
+   }
+   //cout<<arr[4];
+    vector<double> b;
+    for(int i=0;i<arr.size()-ws;i++)
+    {
+        for(int j=i;j<i+ws;j++)
+        {
+            b.push_back(arr[j]);
+        }
+        sort(b.begin(),b.end());
+        int id = ws/2;      
+        if(ws%2!=0)
+         med  = b[id];
+        else
+         med = (b[id]+ b[id-1])/2.0;
+        if(arr[i+ws] > (1+p)*med)
+             cout<<arr[i+ws]<<endl;
+        b.clear();
+    }
+
+
+
+
+
+    return 0;
+}
